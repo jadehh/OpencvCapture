@@ -1,0 +1,2 @@
+numpy==1.19.5
+https://gh.con.sh/https://github.com/jadehh/pythonTools/releases/download/JadeV2.0.5/jade-2.0.5-py3-none-any.whl
