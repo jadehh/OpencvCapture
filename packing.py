@@ -21,7 +21,7 @@ if __name__ == '__main__':
     parser.add_argument('--use_jade_log', type=str,
                         default="True")  ##是否使用JadeLog
     parser.add_argument('--full', type=str,
-                        default="False")  ## 打包成一个完成的包
+                        default="True")  ## 打包成一个完成的包
     parser.add_argument('--console', type=str,
                         default="False")  ## 是否显示命令行窗口,只针对与Windows有效
 
