@@ -13,14 +13,15 @@ if __name__ == '__main__':
     parser.add_argument('--extra_sys_list', type=list,
                         default=[
                             'sys.path.append("/usr/local/opencv-4.5.2-gpu-cuda11.2-cudnn8")',
-                            'sys.path.append("/usr/local/opencv-4.5.2/")'])  ## sys.path.append需要额外打包的路径
+                            'sys.path.append("/usr/local/opencv-4.5.2/")',
+                            'sys.path.append("/opencv-4.8.0/build/lib/python3")'])  ## sys.path.append需要额外打包的路径
 
     parser.add_argument('--extra_path_list', type=list,
                         default=[])  ## 需要额外打包的路径
     parser.add_argument('--use_jade_log', type=str,
                         default="True")  ##是否使用JadeLog
     parser.add_argument('--full', type=str,
-                        default="True")  ## 打包成一个完成的包
+                        default="False")  ## 打包成一个完成的包
     parser.add_argument('--console', type=str,
                         default="False")  ## 是否显示命令行窗口,只针对与Windows有效
 
