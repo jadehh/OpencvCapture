@@ -9,5 +9,6 @@
 from jade import JadeLogging
 try:
     JadeLog = JadeLogging("log")
-except:
+except Exception as e:
+    print("日志写入失败,失败原因为:{}".format(e))
     pass
