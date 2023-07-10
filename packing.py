@@ -15,7 +15,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--extra_path_list', type=list,
                         default=[])  ## 需要额外打包的路径
-    parser.add_argument('--head_str',type=str,default="import sys \nsys.path.append('/usr/local/opencv-4.5.2-gpu-cuda11.2-cudnn8')\nsys.path.append('/usr/local/opencv-4.5.2/')\nsys.path.append('/opencv-4.8.0/build/lib/python3')\n")
+    parser.add_argument('--head_str',type=str,default="import sys \nsys.path.append('/usr/local/opencv-4.5.2-gpu-cuda11.2-cudnn8')\nsys.path.append('/usr/local/opencv-4.5.2/')\nsys.path.append('/opencv-4.8.0/build/lib/python3')\nsys.path.append('/usr/local/opencv')")
 
     parser.add_argument('--use_jade_log', type=str,
                         default="True")  ##是否使用JadeLog
