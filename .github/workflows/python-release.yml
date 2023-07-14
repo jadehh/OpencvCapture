@@ -28,7 +28,7 @@ jobs:
           body_path: CONTRIBUTING.md
           draft: false
           prerelease: false
-  Ubuntu:
+  Ubuntu_18:
     name: 打包发布-操作系统版本:(${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     container:
@@ -52,7 +52,50 @@ jobs:
       - name: 编译打包
         run: |
           cd code
-          python packing.py
+          python packing.py --app_name OpencvCapture-ubuntu18.04
+      - name: 测试是否打包完成
+        run: |
+          cd code/Output
+          ls
+      # 发布
+      - name: 发布
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files:
+            "./code/Output/*"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }} # 给最高的权限
+  Ubuntu_22:
+    name: 打包发布-操作系统版本:(${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ "ubuntu-latest" ] # "ubuntu-18.04", "windows-latest","macos-latest"
+    steps:
+      - name: 下载代码
+        uses: actions/checkout@v3
+        with:
+          repository: jadehh/OpencvCapture
+          ref: main
+          path: code
+          token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your PAT
+      - name: 使用Python环境
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.10.6
+      - name: pip升级
+        shell: pwsh
+        run: |
+          python -m pip install --upgrade pip
+      - name: 准备打包环境
+        run: |
+          pip install -r code/requirements.txt
+      - name: 编译打包
+        run: |
+          cd code
+          python packing.py --app_name OpencvCapture-ubuntu22.04
       - name: 测试是否打包完成
         run: |
           cd code/Output
