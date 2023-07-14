@@ -29,12 +29,15 @@ jobs:
           draft: false
           prerelease: false
   Ubuntu:
-    name: 打包发布-操作系统版本:(${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ "ubuntu-latest" ] # "ubuntu-18.04", "windows-latest","macos-latest"
+  name: 打包发布-操作系统版本:(${{ matrix.os }})
+  runs-on: ${{ matrix.os }}
+  container:
+    image: jadehh/container_ocr:amd64-packing-1.0.2
+    options: --privileged
+  strategy:
+    fail-fast: false
+    matrix:
+      os: [ "ubuntu-latest" ] # "ubuntu-18.04", "windows-latest","macos-latest"
     steps:
       - name: 下载代码
         uses: actions/checkout@v3
@@ -43,17 +46,6 @@ jobs:
           ref: main
           path: code
           token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your PAT
-      - name: 使用Python环境
-        uses: actions/setup-python@v3
-        with:
-          python-version: 3.10.6
-      - name: pip升级
-        shell: pwsh
-        run: |
-          python -m pip install --upgrade pip
-      - name: 准备打包环境
-        run: |
-          pip install -r code/requirements.txt
       - name: 编译打包
         run: |
           cd code
