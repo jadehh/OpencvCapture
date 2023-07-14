@@ -95,7 +95,7 @@ jobs:
       - name: 编译打包
         run: |
           cd code
-          python packing.py --app_name OpencvCapture-ubuntu22.04
+          python packing.py --app_name OpencvCapture-ubuntu20.04
       - name: 测试是否打包完成
         run: |
           cd code/Output
