@@ -29,15 +29,15 @@ jobs:
           draft: false
           prerelease: false
   Ubuntu:
-  name: 打包发布-操作系统版本:(${{ matrix.os }})
-  runs-on: ${{ matrix.os }}
-  container:
-    image: jadehh/container_ocr:amd64-packing-1.0.2
-    options: --privileged
-  strategy:
-    fail-fast: false
-    matrix:
-      os: [ "ubuntu-latest" ] # "ubuntu-18.04", "windows-latest","macos-latest"
+    name: 打包发布-操作系统版本:(${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    container:
+      image: jadehh/container_ocr:amd64-packing-1.0.2
+      options: --privileged
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ "ubuntu-latest" ] # "ubuntu-18.04", "windows-latest","macos-latest"
     steps:
       - name: 下载代码
         uses: actions/checkout@v3
