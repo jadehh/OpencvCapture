@@ -69,6 +69,9 @@ jobs:
   Ubuntu_22:
     name: 打包发布-操作系统版本:(${{ matrix.os }})
     runs-on: ${{ matrix.os }}
+    container:
+      image: jadehh/python:3.8.10-ubuntu20.04
+      options: --privileged
     strategy:
       fail-fast: false
       matrix:
@@ -77,18 +80,10 @@ jobs:
       - name: 下载代码
         uses: actions/checkout@v3
         with:
-          repository: jadehh/OpencvCapture
+          repository: jadehh/LDDTools
           ref: main
           path: code
           token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your PAT
-      - name: 使用Python环境
-        uses: actions/setup-python@v3
-        with:
-          python-version: 3.8
-      - name: pip升级
-        shell: pwsh
-        run: |
-          python -m pip install --upgrade pip
       - name: 准备打包环境
         run: |
           pip install -r code/requirements.txt
