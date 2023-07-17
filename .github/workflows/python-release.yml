@@ -84,7 +84,7 @@ jobs:
       - name: 使用Python环境
         uses: actions/setup-python@v3
         with:
-          python-version: 3.10.6
+          python-version: 3.8
       - name: pip升级
         shell: pwsh
         run: |
