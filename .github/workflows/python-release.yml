@@ -28,11 +28,11 @@ jobs:
           body_path: CONTRIBUTING.md
           draft: false
           prerelease: false
-  Ubuntu_18:
+  Py310:
     name: 打包发布-操作系统版本:(${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     container:
-      image: jadehh/container_ocr:amd64-packing-1.0.2
+      image:  jadehh/python:3.10.11-ubuntu18.04
       options: --privileged
     strategy:
       fail-fast: false
@@ -52,45 +52,7 @@ jobs:
       - name: 编译打包
         run: |
           cd code
-          python packing.py --app_name OpencvCapture-ubuntu18.04
-      - name: 测试是否打包完成
-        run: |
-          cd code/Output
-          ls
-      # 发布
-      - name: 发布
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files:
-            "./code/Output/*"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }} # 给最高的权限
-  Ubuntu_22:
-    name: 打包发布-操作系统版本:(${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
-    container:
-      image: jadehh/python:3.8.10-ubuntu20.04
-      options: --privileged
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ "ubuntu-latest" ] # "ubuntu-18.04", "windows-latest","macos-latest"
-    steps:
-      - name: 下载代码
-        uses: actions/checkout@v3
-        with:
-          repository: jadehh/OpencvCapture
-          ref: main
-          path: code
-          token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your PAT
-      - name: 准备打包环境
-        run: |
-          pip install -r code/requirements.txt
-      - name: 编译打包
-        run: |
-          cd code
-          python packing.py --app_name OpencvCapture-ubuntu20.04
+          python packing.py --app_name OpencvCapture-py3.10
       - name: 测试是否打包完成
         run: |
           cd code/Output
