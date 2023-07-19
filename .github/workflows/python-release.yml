@@ -53,7 +53,7 @@ jobs:
       - name: 编译打包
         run: |
           cd code
-          python packing.py  --app_name OpencvCapture-py3.10 --exclude_files libpython3.10.so.1.0,libbz2.so.1.0,libcrypto.so.1.1,libsqlite3.so.0,libssl.so.1.1,libz.so.1,cryptography/hazmat/bindings/_openssl.abi3.so
+          python packing.py --full True  --app_name OpencvCapture-py3.10 --exclude_files libbz2.so.1.0,libcrypto.so.1.1,libsqlite3.so.0,libssl.so.1.1,libz.so.1,cryptography/hazmat/bindings/_openssl.abi3.so
       - name: 测试是否打包完成
         run: |
           cd code/Output
