@@ -49,6 +49,7 @@ jobs:
       - name: 准备打包环境
         run: |
           pip install -r code/requirements.txt
+          pip uninstall -y numpy
       - name: 编译打包
         run: |
           cd code
