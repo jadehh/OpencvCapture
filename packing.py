@@ -10,12 +10,11 @@ from jade import *
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--extra_sys_list', type=list,
-                        default=[])  ## sys.path.append需要额外打包的路径
+    parser.add_argument('--extra_sys_str', type=str,
+                        default="/usr/local/opencv-4.5.2-gpu-cuda11.2-cudnn8,/usr/local/opencv-4.5.2/,/opencv-4.8.0/build/lib/python3,/usr/local/opencv,/usr/local/site-packages")  ## sys.path.append需要额外打包的路径
 
     parser.add_argument('--extra_path_list', type=list,
                         default=[])  ## 需要额外打包的路径
-    parser.add_argument('--head_str',type=str,default="import sys \nsys.path.append('/usr/local/opencv-4.5.2-gpu-cuda11.2-cudnn8')\nsys.path.append('/usr/local/opencv-4.5.2/')\nsys.path.append('/opencv-4.8.0/build/lib/python3')\nsys.path.append('/usr/local/opencv')\n")
 
     parser.add_argument('--use_jade_log', type=str,
                         default="True")  ##是否使用JadeLog
@@ -35,7 +34,7 @@ if __name__ == '__main__':
     parser.add_argument('--lib_path', type=str, default="")  ## 是否lib包分开打包
     parser.add_argument('--is_qt', type=str, default="False")  ## qt 会将controller view src 都进行编译
     parser.add_argument('--specify_files', type=str, default="")  ## 指定编译的文件
-    parser.add_argument('--exclude_files', type=str, default="python36.dll,python3.dll")  ## 指定编译的文件
+    parser.add_argument('--exclude_files', type=str, default="")  ## 指定编译的文件
     parser.add_argument("--zip_lib",type=str,default='False')
     parser.add_argument('--main', type=str, default="from samplesMain import main\n"
                                                     "import os\n"
