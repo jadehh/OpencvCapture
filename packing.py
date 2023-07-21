@@ -17,7 +17,7 @@ if __name__ == '__main__':
                         default=[])  ## 需要额外打包的路径
 
     ## 引入numpy其他库
-    parser.add_argument("--head_str",type=str,default="from __future__ import annotations\nimport secrets\n")
+    parser.add_argument("--head_str",type=str,default="from __future__ import annotations\nimport secrets\nimport numbers\n")
     parser.add_argument('--use_jade_log', type=str,
                         default="True")  ##是否使用JadeLog
     parser.add_argument('--full', type=str,

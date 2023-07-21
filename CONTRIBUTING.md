@@ -1,11 +1,15 @@
 ### 更新日志
 
-#### v0.0.1.6 - 2023-07-21
-*  发布py3.8版本
+#### v0.0.1.7 - 2023-07-21
+*  ModuleNotFoundError: No module named 'numbers'
 ---
 
 
 <details onclose>
+
+#### v0.0.1.6 - 2023-07-21
+*  发布py3.8版本
+---
 
 #### v0.0.1.5 - 2023-07-19
 *  解决numpy依赖问题
