@@ -1,11 +1,17 @@
 ### 更新日志
 
-#### v0.0.1.7 - 2023-07-21
-*  ModuleNotFoundError: No module named 'numbers'
+
+
+#### v0.0.1.8 - 2023-07-21
+*  ModuleNotFoundError: No module named 'contextvars'
 ---
 
 
 <details onclose>
+
+#### v0.0.1.7 - 2023-07-21
+*  ModuleNotFoundError: No module named 'numbers'
+---
 
 #### v0.0.1.6 - 2023-07-21
 *  发布py3.8版本
