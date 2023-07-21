@@ -67,3 +67,42 @@ jobs:
             "./code/Output/*"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }} # 给最高的权限
+  Py38:
+    name: 打包发布-操作系统版本:(${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    container:
+      image: jadehh/python:3.8.16-ubuntu18.04
+      options: --privileged
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ "ubuntu-latest" ] # "ubuntu-18.04", "windows-latest","macos-latest"
+    steps:
+      - name: 下载代码
+        uses: actions/checkout@v3
+        with:
+          repository: jadehh/OpencvCapture
+          ref: main
+          path: code
+          token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your PAT
+      - name: 准备打包环境
+        run: |
+          pip install -r code/requirements.txt
+          pip uninstall -y numpy
+      - name: 编译打包
+        run: |
+          cd code
+          python packing.py --full True  --app_name OpencvCapture-py3.8 --exclude_files libbz2.so.1.0,libcrypto.so.1.1,libsqlite3.so.0,libssl.so.1.1,libz.so.1,cryptography/hazmat/bindings/_openssl.abi3.so
+      - name: 测试是否打包完成
+        run: |
+          cd code/Output
+          ls
+      # 发布
+      - name: 发布
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files:
+            "./code/Output/*"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }} # 给最高的权限
